@@ -30,7 +30,7 @@
     _onTop=[[NSMutableArray alloc]init];
     self.tableView.rowHeight=100;
     [self downDataWithUrl];
-   
+    
     
   
 }
@@ -85,33 +85,15 @@
     [cell showDataWithModel:model];
     return cell;
 }
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    NSDate *date=[NSDate date];
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 80)];
-    UIImageView *small=[[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 22, 22)];
-    CGFloat spacing=10;
-    for (NSInteger i=0; i<4; i++) {
-        UIImageView *big=[[UIImageView alloc]initWithFrame:CGRectMake(spacing+((kScreenSize.width-50)/4+spacing)*i, 32, (kScreenSize.width-50)/4, 38)];
-        
-    }
-    
-    
-    
-    return view;
-}
+//-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//  
+//    
+//    
+//    
+//    return view;
+//}
 -(void)createDailiyView :(NSString*)title support:(NSString*)supportStr imageName:(NSString*)imageName{
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 80)];
-    UIImageView *small=[[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 22, 22)];
-    UILabel *typeLabel=[MyControl creatLabelWithFrame:CGRectMake(37, 27, 90, 22) text:title];
-    UILabel *support=[MyControl creatLabelWithFrame:CGRectMake(137, 27, kScreenSize.width-137, 22) text:supportStr];
-    
-    
-    CGFloat spacing=10;
-    for (NSInteger i=0; i<4; i++) {
-        UIImageView *big=[[UIImageView alloc]initWithFrame:CGRectMake(spacing+((kScreenSize.width-50)/4+spacing)*i, 32, (kScreenSize.width-50)/4, 38)];
-        big.image=[UIImage imageNamed:imageName];
-        [view addSubview:big];
-    }
+  
 
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -121,7 +103,11 @@
     NSArray *arr2=[arr[1] componentsSeparatedByString:@"="];
     NSString *uid=[arr2 lastObject];
     article.mid=uid;
+    article.musername=model.author;
+    article.navigationItem.title=@"全部";
+    article.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:article animated:YES];
+    self.navigationController.toolbar.hidden=YES;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

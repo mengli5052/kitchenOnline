@@ -10,8 +10,12 @@
 #import <UIKit/UIKit.h>
 
 @interface LZXHelper : NSObject
+//将一个字符串转换为date;
++(NSDate*)dateFromString:(NSString*)timeString;
++(NSString*)nowToDate:(NSString *)timeString;
 //把一个秒字符串 转化为真正的本地时间
 //@"1419055200" -> 转化 日期字符串
+
 + (NSString *)dateStringFromNumberTimer:(NSString *)timerStr;
 //根据字符串内容的多少  在固定宽度 下计算出实际的行高
 + (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat)textWidth fontSize:(CGFloat)size;

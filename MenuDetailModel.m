@@ -9,5 +9,10 @@
 #import "MenuDetailModel.h"
 
 @implementation MenuDetailModel
-
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
+}
+-(id)valueForUndefinedKey:(NSString *)key{
+    return nil;
+}
 @end

@@ -7,14 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
+#import "JHRefresh.h"
+#import "AFNetworking.h"
 @interface BaseViewController : UITableViewController
 {
     AFHTTPRequestOperationManager *_manager;
     NSMutableArray *_dataArr;
+    BOOL _isrRefreshing;
+    NSInteger _currentPage;
+    BOOL _isLoadMoring;
 }
+@property(nonatomic)SEL action;
+@property(nonatomic,strong)id target;
+@property(nonatomic)BOOL isRefreshing;
+@property(nonatomic,assign)NSInteger currentPage;
+@property(nonatomic,assign)BOOL isLoadMoring;
 -(void)firstInit;
 -(void)addItemWithTitle;
--(void)downDataWithUrl;
+-(void)downDataWithTarget:(id)target  action:(SEL)action;
+-(void)downDataWithUrl:(NSString*)url;
 @end

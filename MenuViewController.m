@@ -7,9 +7,16 @@
 //
 
 #import "MenuViewController.h"
-
+#import "RecentlyPopularViewController.h"
+#import "TheLatestViewController.h"
+#import "CommonViewController.h"
+#import "MainScrollView.h"
+#import "GottalenCell.h"
+#define kScreenSize [UIScreen mainScreen].bounds.size
 @interface MenuViewController ()
-
+{
+    NSArray *_titles;
+}
 @end
 
 @implementation MenuViewController
@@ -17,8 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addItemWithTitle];
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed: @"Icon_Navbar_Search"] style:UIBarButtonItemStylePlain target:self action:@selector(deliver:)];
-   
+    NSString *path=[[NSBundle mainBundle]pathForResource:@"MenuList" ofType:@"plist"];
+    _titles=[NSArray arrayWithContentsOfFile:path];
+    //self.navigationItem.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed: @"Background_Bottom_Orange"]];
+    [self createHeaderView];
+    self.tableView.rowHeight=100;
 }
 -(void)addItemWithTitle{
     self.navigationController.navigationBar.translucent=NO;
@@ -28,6 +38,11 @@
     self.navigationItem.titleView=titleV;
     
     
+}
+-(void)createHeaderView{
+MainScrollView *view=[[[NSBundle mainBundle]loadNibNamed:@"MainScrollView" owner:nil
+                                                options:nil]lastObject];
+    self.tableView.tableHeaderView=view;
 }
 -(void)deliver:(UIBarButtonItem*)button{
 
@@ -43,26 +58,50 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
+
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
-    return 0;
+    return _titles.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
-    // Configure the cell...
+    if (cell==nil) {
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    }
+    NSDictionary *dict=_titles[indexPath.row];
+    
+    cell.imageView.image=[UIImage imageNamed:dict[@"bigImage"]];
+    cell.textLabel.text=dict[@"title"];
+    cell.detailTextLabel.text=dict[@"detailTitle"];
     
     return cell;
 }
-*/
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row==0) {
+        RecentlyPopularViewController *recent=[[RecentlyPopularViewController alloc]init];
+        recent.navigationItem.title=@"最近流行";
+       recent.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:recent animated:YES];
+    }else if (indexPath.row==1){
+        TheLatestViewController *latest=[[TheLatestViewController alloc]init];
+        latest.hidesBottomBarWhenPushed=YES;
+        latest.navigationItem.title=@"最新菜谱";
+        [self.navigationController pushViewController:latest animated:YES];
+    }else{
+        CommonViewController *common=[[CommonViewController alloc]init];
+        common.hidesBottomBarWhenPushed=YES;
+        common.navigationItem.title=@"大家都在做";
+        [self.navigationController pushViewController:common animated:YES];
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.

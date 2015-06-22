@@ -9,12 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "LatestModel.h"
 @interface LatestCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @property (weak, nonatomic) IBOutlet UIButton *comment;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *picture;
 @property (weak, nonatomic) IBOutlet UILabel *title2Label;
+@property (weak, nonatomic) IBOutlet UIButton *enjoyButton;
+@property (weak, nonatomic) IBOutlet UIButton *forwordButton;
 
 -(void)showDataWithModel:(LatestModel*)model;
 @end

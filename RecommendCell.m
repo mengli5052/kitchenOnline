@@ -12,11 +12,12 @@
 @implementation RecommendCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.iconImage.layer.masksToBounds=YES;
+    self.iconImage.layer.cornerRadius=4;
 }
 -(void)showDataWithModel:(Model*)model{
     self.imageView.frame=CGRectMake(10, 10, 80, 80);
-    [self.iconImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:kImageUrl,model.imageid]] placeholderImage:nil];
+    [self.iconImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:kImageUrl,model.imageid]] placeholderImage:[UIImage imageNamed: @"qzone"]];
     self.authorImage.frame=CGRectMake(95, 68, 9, 11);
     self.authorImage.image=[UIImage imageNamed: @"Icon_Author"];
     self.author.frame=CGRectMake(107, 50, 110, 30);

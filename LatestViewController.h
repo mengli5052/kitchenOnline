@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 张梦丽. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "SharBaseViewController.h"
 
-@interface LatestViewController : BaseViewController
+@interface LatestViewController : SharBaseViewController
 
 @end

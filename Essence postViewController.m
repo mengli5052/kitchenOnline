@@ -16,7 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationController.navigationItem.title=@"精华帖";
+    [self downloadDataWithUrl:kEssencepostUrl];
+  
 }
 
 - (void)didReceiveMemoryWarning {

@@ -12,6 +12,26 @@
 
 
 @implementation LZXHelper
++(NSDate*)dateFromString:(NSString*)timeString{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date = [dateFormatter dateFromString:timeString];
+    return date;
+
+}
+//+(NSString*)nowToDate:(NSString *)timeString{
+//    NSDate *earliaerDate=[self dateFromString:timeString];
+//    NSDate *currentDate=[NSDate date];
+//    NSTimeInterval interval=[currentDate timeIntervalSinceDate:earliaerDate];
+//    NSString *str=nil;
+//    if ((interval/60+1)<60) {
+//        str=[NSString stringWithFormat:@"%f",interval/60];
+//    }
+//    
+//  return str;           
+//    
+//}
 + (NSString *)dateStringFromNumberTimer:(NSString *)timerStr {
     //转化为Double
     double t = [timerStr doubleValue];
@@ -88,7 +108,7 @@
     
     if (toDate && today) {//不为nil进行转化
         //分割 具体时间差
-        NSDateComponents *d = [cal components:unitFlags fromDate:today toDate:toDate options:0 ];
+        NSDateComponents *d = [cal components:unitFlags fromDate:toDate toDate:today options:0 ];
         
         //NSString *dateStr=[NSString stringWithFormat:@"%d年%d月%d日%d时%d分%d秒",[d year],[d month], [d day], [d hour], [d minute], [d second]];
         NSString *dateStr=[NSString stringWithFormat:@"%02ld:%02ld:%02ld",[d hour], [d minute], [d second]];

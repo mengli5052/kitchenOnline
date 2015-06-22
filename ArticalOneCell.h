@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *displayName;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
--(void)showDataWithModel:(ArticleModel*)model;
+@property (weak, nonatomic) IBOutlet UIImageView *image;
+
+-(void)displayDataWithModel:(ArticleModel*)model;
 @end

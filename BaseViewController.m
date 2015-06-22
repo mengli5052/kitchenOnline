@@ -7,6 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "LatestModel.h"
+#import "LatestCell.h"
 
 @interface BaseViewController ()
 
@@ -27,6 +29,7 @@
     _dataArr=[[NSMutableArray alloc]init];
     _manager=[AFHTTPRequestOperationManager manager];
     _manager.responseSerializer=[AFHTTPResponseSerializer serializer];
+   
     
 }
 -(void)addItemWithTitle{
@@ -35,19 +38,86 @@
     self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed: @"Icon_Navbar_Mine"] style:UIBarButtonItemStylePlain target:self action:@selector(mineClick)];
     UIImageView *titleV=[[UIImageView alloc]initWithImage:[UIImage imageNamed: @"Title_eCook"]];
     self.navigationItem.titleView=titleV;
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed: @"Icon_Navbar_Search"] style:UIBarButtonItemStylePlain target:self action:@selector(searchClick:)];
+  
+    UIBarButtonItem *backItem=[[UIBarButtonItem alloc]init];
+    backItem.title=@"返回";
+    self.navigationItem.backBarButtonItem=backItem;
     
-    
+}
+-(void)downDataWithUrl:(NSString*)url{
+    NSString *urlString=[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [_manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"下载成功");
+            if (responseObject) {
+                
+                NSDictionary *dict=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                NSArray *listArr=dict[@"list"];
+                for (NSDictionary *dict in listArr) {
+                    LatestModel *model=[[LatestModel alloc]init];
+                    [model setValuesForKeysWithDictionary:dict];
+                    
+                    [_dataArr addObject:model];
+                    
+                }
+                [self.tableView reloadData];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"网络下载失败");
+        }];
+}
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    LatestCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LatestCell"];
+    if (cell==nil) {
+        cell=[[[NSBundle mainBundle]loadNibNamed:@"LatestCell" owner:nil options:nil]lastObject];
+    }
+    LatestModel *model=_dataArr[indexPath.row];
+    [cell showDataWithModel:model];
+  
+    return cell;
 }
 -(void)mineClick{
 
 }
--(void)searchClick:(UIBarButtonItem*)button{
+
+-(void)downDataWithTarget:(id)target action:(SEL)action{
+   
 
 }
--(void)downDataWithUrl{
-
+#pragma mark - 刷新 这点有问题需要调试;
+- (void)creatRefreshView {//在子类中调用 如果不适合子类那么重写
+    __weak typeof(self) weakSelf = self;
+    
+    [self.tableView addRefreshHeaderViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        if (weakSelf.isRefreshing) {
+            return ;
+        }
+        weakSelf.currentPage = 1;
+        weakSelf.isRefreshing = YES;
+    }];
+    
+        [self.tableView addRefreshFooterViewWithAniViewClass:[JHRefreshCommonAniView class] beginRefresh:^{
+        //上拉加载更多
+        if (weakSelf.isLoadMoring) {
+            return ;
+        }
+        weakSelf.isLoadMoring = YES;
+        weakSelf.currentPage++;
+        }];
+    
+    
 }
+//结束刷新
+- (void)endRefreshing {
+    if (self.isRefreshing) {
+        self.isRefreshing = NO;
+        [self.tableView headerEndRefreshingWithResult:JHRefreshResultSuccess];
+    }
+    if (self.isLoadMoring) {
+        self.isLoadMoring = NO;
+        [self.tableView footerEndRefreshing];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

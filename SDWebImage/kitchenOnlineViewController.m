@@ -36,6 +36,8 @@
     }
     self.viewControllers=vcArr;
     self.tabBar.backgroundColor=[UIColor blackColor];
+    NSLog(@"%s  %d",__func__,__LINE__);
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -32,34 +32,54 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWX-TU-7M6">
-                        <rect key="frame" x="243" y="91" width="77" height="23"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <state key="normal" title="  2" image="Icon_Comment_Brown.png">
+                        <rect key="frame" x="231" y="95" width="41" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title=" 2" image="Icon_Topic_Comment.png">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="发表:  分钟前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9p-Hy-XTf">
-                        <rect key="frame" x="221" y="3" width="99" height="21"/>
+                        <rect key="frame" x="172" y="6" width="148" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-U0-LAu">
+                        <rect key="frame" x="277" y="92" width="43" height="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title=" 0  " image="Icon_Topic_Refer.png">
+                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCo-xX-YEt">
+                        <rect key="frame" x="185" y="94" width="38" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title=" 23" image="Icon_Topic_Love.png">
+                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="comment" destination="iWX-TU-7M6" id="Val-uh-yxX"/>
+                <outlet property="enjoyButton" destination="pCo-xX-YEt" id="RpY-cu-QI0"/>
+                <outlet property="forwordButton" destination="SEI-U0-LAu" id="8hA-uf-p7v"/>
                 <outlet property="iconImage" destination="qjn-Gx-XxB" id="pAp-sZ-uNA"/>
                 <outlet property="picture" destination="ken-aZ-11C" id="tCa-CC-GAx"/>
                 <outlet property="timeLabel" destination="x9p-Hy-XTf" id="Klf-X7-oyy"/>
                 <outlet property="title2Label" destination="rH3-2c-ZTv" id="V8i-qE-IRd"/>
                 <outlet property="titleLabel" destination="Lh2-n3-Zjh" id="ufu-fa-hJL"/>
             </connections>
-            <point key="canvasLocation" x="295" y="281"/>
+            <point key="canvasLocation" x="295" y="274"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="Icon_Author.png" width="9" height="11"/>
-        <image name="Icon_Comment_Brown.png" width="17" height="17"/>
+        <image name="Icon_Topic_Comment.png" width="11" height="11"/>
+        <image name="Icon_Topic_Love.png" width="11" height="11"/>
+        <image name="Icon_Topic_Refer.png" width="11" height="11"/>
     </resources>
 </document>
